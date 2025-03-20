@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://billxj7rnms3q"]
+
+[ext_resource type="Script" uid="uid://cybmsoijxaddf" path="res://base_weapon.gd" id="1_o2wld"]
+[ext_resource type="Texture2D" uid="uid://cqufqycr1vxpo" path="res://axe.png" id="1_swcir"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o2wld"]
+size = Vector2(24, 104)
+
+[node name="Weapon" type="RigidBody2D"]
+angular_damp_mode = 1
+angular_damp = 10.0
+script = ExtResource("1_o2wld")
+
+[node name="WeaponSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-4, -64)
+scale = Vector2(8, 8)
+texture = ExtResource("1_swcir")
+
+[node name="WeaponCollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -52)
+shape = SubResource("RectangleShape2D_o2wld")

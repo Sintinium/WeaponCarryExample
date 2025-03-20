@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://dbk8xfmhthmpg"]
+
+[ext_resource type="PackedScene" uid="uid://billxj7rnms3q" path="res://weapon.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://bxwyd42q4goa7" path="res://cursor.gd" id="2_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://0arqqyatmupw" path="res://icon.svg" id="3_h2yge"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h2yge"]
+radius = 16.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h2yge"]
+distance = 19.0
+
+[node name="Main" type="Node2D"]
+
+[node name="Cursor" type="StaticBody2D" parent="." node_paths=PackedStringArray("weapon_joint", "click_area")]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("2_0xm2m")
+weapon_joint = NodePath("CursorWeaponJoint")
+click_area = NodePath("ClickArea")
+
+[node name="Sprite2D" type="Sprite2D" parent="Cursor"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_h2yge")
+
+[node name="ClickArea" type="Area2D" parent="Cursor"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cursor/ClickArea"]
+shape = SubResource("CircleShape2D_h2yge")
+
+[node name="CursorWeaponJoint" type="PinJoint2D" parent="Cursor"]
+node_a = NodePath("..")
+bias = 0.9
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(19, 608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(584.5, 20)
+shape = SubResource("WorldBoundaryShape2D_h2yge")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
+offset_left = -114.0
+offset_right = 1283.0
+offset_bottom = 40.0
+
+[node name="Weapon" parent="." instance=ExtResource("1_ig7tw")]
+position = Vector2(533, 466)
